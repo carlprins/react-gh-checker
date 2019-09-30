@@ -1,12 +1,16 @@
 .FormContainer {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 4.4rem 10%;
+}
   
-  
+h1 {
+  color: rgb(13, 15, 131);
+  padding: 10px;
+  font-size: 24px;
+}
+
+input {
+  color: grey;
+}
