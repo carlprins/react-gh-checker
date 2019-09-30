@@ -6,7 +6,7 @@ In the project directory, you can run:
 
 ### 'npm run deploy'
 
-This publishes to gh-pages
+This publishes to gh-pages. This is now an updated change from a new clone.
 
 ### `npm start`
 
