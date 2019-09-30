@@ -8,13 +8,15 @@ class FormInput extends React.Component {
         this.handleUserInput = this.handleUserInput.bind(this);
     }
     handleUserInput(e) {
-        this.setState({userInput: e.target.value});
+        let value = e.target.value
+        this.setState({userInput: value});
+        this.props.onChange(e);
     }
     render(){
         return (
             <div className="InputItem">
                 <question>{this.props.name}</question>
-                <input type={this.props.type} onChange={this.handleUserInput} value={this.state.userInput} />
+                <input type={this.props.type} onChange={this.handleUserInput} value={this.state.userInput} name={this.props.name} />
                 <h2>{this.state.userInput}</h2>
             </div>
         )

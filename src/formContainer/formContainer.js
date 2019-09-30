@@ -1,82 +1,52 @@
 import React from 'react';
 import FormSection from '../formSection/formSection';
 import './formContainer.css';
+import reqFields from '../Requirements/Requirements';
+import FormInput from '../formInput/formInput';
 
-const section1 = [
-    {
-        id: 1,
-        name: "Retailer",
-        type: "dropdown",
-        options: ["Select", "Origin", "AGL", "EnergyAustralia", "Powershop", "Red Energy", "Alinta"]
-    }, {
-        id: 2,
-        name: "Bill Start Date",
-        type: "date",
-        options: []
-    }, {
-        id: 3,
-        name: "Bill End Date",
-        type: "date",
-        options: []
-    }, {
-        id: 4,
-        name: "Opening Balance",
-        type: "number",
-        options: []
-    }, {
-        id: 5,
-        name: "Closing Balance",
-        type: "number",
-        options: []
-    },{
-        id: 4,
-        name: "Period Start Date",
-        type: "date",
-        options: []
-
-    }, {
-        id: 5,
-        name: "Period End Date",
-        type: "date",
-        options: []
-    }, {
-        id: 6,
-        name: "Peak Usage",
-        type: "number",
-        options: []
-    }, {
-        id: 7,
-        name: "Peak Rate",
-        type: "number",
-        options: []
-    }
-]
-
-const section2 = [
-    
-]
 
 class FormContainer extends React.Component {
     constructor(props){
         super(props)
         this.state = { 
-            billTotal: 10,
+            billTotal: 0,
             OpeningBalance: 0,
             ClosingBalance: 0
         }
-        this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.calcFields = this.calcFields.bind(this);
+        
     }
-    handleUpdate(value) {
-        this.setState( {billTotal: value})
+    calcFields(){
+        let billTotal = this.state.ClosingBalance - this.state.OpeningBalance
+        this.setState({billTotal: billTotal})
     }
+    handleChange(e) {
+        const value = e.target.value
+        const name = e.target.name
+        this.setState({ [name]: value })
+    }
+
     render(){
         return (
-            <div className="FormContainer">
-                <h1>{this.props.formTitle}</h1>
-                <p>Bill Total</p>
-                <p>{this.state.billTotal}</p>
-                <FormSection sectionName="Basic Information" sectionInputs={section1} onChange={this.handleUpdate} />
-                
+            <div >
+                <div className="FormHeading">
+                    <h1>{this.props.formTitle}</h1>
+                </div>
+                <div className="CalcFields">
+                    <h2>Calculated Fields from this form</h2>
+                    <p>Opening Balance</p>
+                    <p>{this.state.OpeningBalance}</p>
+                    <p>Closing Balance</p>
+                    <p>{this.state.ClosingBalance}</p>
+                    <p>Calc Bill Total</p>
+                    <p>{this.state.billTotal}</p>
+                    <input type="button" onClick={this.calcFields} value="Calc now"></input>
+                </div>
+                <div className="FormContainer">
+                    {reqFields.map(field => <FormInput name={field.name} type={field.type} onChange={this.handleChange} />)}
+                    
+                </div>
             </div>
             
             
