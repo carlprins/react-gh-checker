@@ -19,12 +19,13 @@ class FormContainer extends React.Component {
     }
     calcFields(){
         let billTotal = this.state.ClosingBalance - this.state.OpeningBalance
-        this.setState({billTotal: billTotal})
+        this.setState( { billTotal: billTotal } )
     }
-    handleChange(e) {
+    handleChange = async (e) => {
         const value = e.target.value
         const name = e.target.name
         this.setState({ [name]: value })
+        
     }
 
     render(){
@@ -41,10 +42,10 @@ class FormContainer extends React.Component {
                     <p>{this.state.ClosingBalance}</p>
                     <p>Calc Bill Total</p>
                     <p>{this.state.billTotal}</p>
-                    <input type="button" onClick={this.calcFields} value="Calc now"></input>
+                    <input className="Button" type="button" onClick={this.calcFields} value="Calc now"></input>
                 </div>
                 <div className="FormContainer">
-                    {reqFields.map(field => <FormInput name={field.name} type={field.type} onChange={this.handleChange} />)}
+                    {reqFields.map(field => <FormInput name={field.name} type={field.type} onChange={this.handleChange} Calc={this.calcFields} />)}
                     
                 </div>
             </div>
