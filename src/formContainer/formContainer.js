@@ -3,6 +3,7 @@ import FormSection from '../formSection/formSection';
 import './formContainer.css';
 import reqFields from '../Requirements/Requirements';
 import FormInput from '../formInput/formInput';
+import FormSelect from '../formSelect/formSelect';
 
 
 class FormContainer extends React.Component {
@@ -11,7 +12,8 @@ class FormContainer extends React.Component {
         this.state = { 
             billTotal: 0,
             OpeningBalance: 0,
-            ClosingBalance: 0
+            ClosingBalance: 0,
+            Retailer: ""
         }
         this.handleChange = this.handleChange.bind(this);
         this.calcFields = this.calcFields.bind(this);
@@ -24,15 +26,25 @@ class FormContainer extends React.Component {
     handleChange = async (e) => {
         const value = e.target.value
         const name = e.target.name
+        console.log(value)
+        console.log(name)
         this.setState({ [name]: value })
         
     }
 
     render(){
         return (
-            <div >
+            <div className="FormContainer" >
                 <div className="FormHeading">
                     <h1>{this.props.formTitle}</h1>
+                    {reqFields.map(field => {
+                        if (field.type === "number") {
+                            return <FormInput name={field.name} type={field.type} onChange={this.handleChange} Calc={this.calcFields} />
+                        } else if (field.type === "dropdown") {
+                            return <FormSelect name={field.name} options={field.options} onChange={this.handleChange} />
+                        }
+
+                    })}
                 </div>
                 <div className="CalcFields">
                     <h2>Calculated Fields from this form</h2>
@@ -42,10 +54,12 @@ class FormContainer extends React.Component {
                     <p>{this.state.ClosingBalance}</p>
                     <p>Calc Bill Total</p>
                     <p>{this.state.billTotal}</p>
+                    <p>Selected Retailer</p>
+                    <p>{this.state.Retailer}</p>
                     <input className="Button" type="button" onClick={this.calcFields} value="Calc now"></input>
                 </div>
-                <div className="FormContainer">
-                    {reqFields.map(field => <FormInput name={field.name} type={field.type} onChange={this.handleChange} Calc={this.calcFields} />)}
+                <div>
+                    
                     
                 </div>
             </div>

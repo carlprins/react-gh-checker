@@ -3,14 +3,16 @@ import React from 'react';
 class FormSelect extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {value: ''};
+      this.state = { userInput: '' };
   
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
   
-    handleChange(event) {
-      this.setState({value: event.target.value});
+    handleChange(e) {
+      let value = e.target.value
+      this.setState({ userInput: value});
+      this.props.onChange(e).then(result => {return});
     }
   
     handleSubmit(event) {
@@ -20,16 +22,16 @@ class FormSelect extends React.Component {
   
     render() {
       return (
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <label>
             {this.props.name}
-            <select value={this.state.value} onChange={this.handleChange}>
-              {this.props.options.map(option => <option value={option}>{option}</option>)}
+            <select value={this.state.value} onChange={this.handleChange} name={this.props.name}>
+              {this.props.options.map(option => <option value={option} key={1}>{option}</option>)}
               
             </select>
           </label>
-          <h2>{this.state.value}</h2>
-          <input type="submit" value="Submit" />
+          <h2>{this.state.userInput}</h2>
+          
         </form>
       );
     }

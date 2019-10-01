@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <FormContainer formTitle="Form Container" />
+        <FormContainer formTitle="Bill Checker" />
         
         
       </header>
