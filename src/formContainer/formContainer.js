@@ -21,6 +21,8 @@ class FormContainer extends React.Component {
             peakUsage: '',
             peakRate: '',
             calcUsageCharges: '',
+            dailySupplyCharge: '',
+            calcSupplyCharges: '100'
 
         }
         this.handleChange = this.handleChange.bind(this);
@@ -33,9 +35,11 @@ class FormContainer extends React.Component {
         let a = new Date(this.state.period1StartDate)
         let b = new Date(this.state.period1EndDate)
         let period1Days = (b-a)/(1000 * 60 * 60 *24)+1
+        let supplyCharges = this.state.dailySupplyCharge/100 * period1Days
         this.setState( { calcBillTotal: billTotal } )
         this.setState( { calcUsageCharges: usageCharges} )
         this.setState( { calcPeriod1Days: period1Days } )
+        this.setState( {calcSupplyCharges: supplyCharges} )
     }
     handleChange = async (e) => {
         const value = e.target.value
@@ -68,6 +72,8 @@ class FormContainer extends React.Component {
                     <p>{this.state.calcPeriod1Days}</p>
                     <p>Usage Charges</p>
                     <p>{this.state.calcUsageCharges}</p>
+                    <p>Supply Charges</p>
+                    <p>{this.state.calcSupplyCharges}</p>
                     <input className="Button" type="button" onClick={this.calcFields} value="Calc now"></input>
                 </div>
                 <div>
