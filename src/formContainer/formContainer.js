@@ -1,11 +1,14 @@
 import React from 'react';
-import moment from 'react-moment';
 import FormSection from '../formSection/formSection';
 import './formContainer.css';
 import reqFields from '../Requirements/Requirements';
 import FormInput from '../formInput/formInput';
 import FormSelect from '../formSelect/formSelect';
 
+export const periodData = {
+    calcGrossBill: "Hi there",
+    value: 100
+}
 
 class FormContainer extends React.Component {
     constructor(props){
@@ -17,12 +20,14 @@ class FormContainer extends React.Component {
             calcBillTotal: '',
             period1StartDate: '',
             period1EndDate: '',
-            calcPeriod1Days: '10',
+            calcPeriod1Days: '',
             peakUsage: '',
             peakRate: '',
             calcUsageCharges: '',
             dailySupplyCharge: '',
-            calcSupplyCharges: '100'
+            calcSupplyCharges: '',
+            calcGrossBill: '',
+            calcControl: '',
 
         }
         this.handleChange = this.handleChange.bind(this);
@@ -30,16 +35,27 @@ class FormContainer extends React.Component {
         
     }
     calcFields(){
-        let billTotal = this.state.closingBalance - this.state.openingBalance
-        let usageCharges = this.state.peakUsage * this.state.peakRate /100
-        let a = new Date(this.state.period1StartDate)
-        let b = new Date(this.state.period1EndDate)
+        let field = this.state
+        let billTotal = field.closingBalance - field.openingBalance
+        let usageCharges = field.peakUsage * field.peakRate /100
+        let a = new Date(field.period1StartDate)
+        let b = new Date(field.period1EndDate)
         let period1Days = (b-a)/(1000 * 60 * 60 *24)+1
-        let supplyCharges = this.state.dailySupplyCharge/100 * period1Days
-        this.setState( { calcBillTotal: billTotal } )
-        this.setState( { calcUsageCharges: usageCharges} )
+        let supplyCharges = field.dailySupplyCharge/100 * period1Days
+        let grossBill = usageCharges + supplyCharges
+        let controlDiff = Math.round((billTotal - grossBill),2)
+        
+        this.setState( {
+            calcBillTotal: billTotal,
+            calcUsageCharges: usageCharges,
+            calcPeriod1Days: period1Days,
+            calcSupplyCharges: supplyCharges,
+            calcGrossBill: grossBill,
+            calcControl: controlDiff,
+            })
+        /*this.setState( { calcUsageCharges: usageCharges} )
         this.setState( { calcPeriod1Days: period1Days } )
-        this.setState( {calcSupplyCharges: supplyCharges} )
+        this.setState( {calcSupplyCharges: supplyCharges} )*/
     }
     handleChange = async (e) => {
         const value = e.target.value
@@ -74,7 +90,10 @@ class FormContainer extends React.Component {
                     <p>{this.state.calcUsageCharges}</p>
                     <p>Supply Charges</p>
                     <p>{this.state.calcSupplyCharges}</p>
-                    <input className="Button" type="button" onClick={this.calcFields} value="Calc now"></input>
+                    <p>Gross Bill Total</p>
+                    <p>{this.state.calcGrossBill}</p>
+                    <p>Control Total</p>
+                    <p>{this.state.calcControl}</p>
                 </div>
                 <div>
                     
