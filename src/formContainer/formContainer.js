@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'react-moment';
 import FormSection from '../formSection/formSection';
 import './formContainer.css';
 import reqFields from '../Requirements/Requirements';
@@ -10,13 +11,16 @@ class FormContainer extends React.Component {
     constructor(props){
         super(props)
         this.state = { 
-            billTotal: '',
+            retailer: "",
             openingBalance: '',
             closingBalance: '',
-            retailer: "",
+            calcBillTotal: '',
+            period1StartDate: '',
+            period1EndDate: '',
+            calcPeriod1Days: '10',
             peakUsage: '',
             peakRate: '',
-            usageCharges: '',
+            calcUsageCharges: '',
 
         }
         this.handleChange = this.handleChange.bind(this);
@@ -26,8 +30,12 @@ class FormContainer extends React.Component {
     calcFields(){
         let billTotal = this.state.closingBalance - this.state.openingBalance
         let usageCharges = this.state.peakUsage * this.state.peakRate /100
-        this.setState( { billTotal: billTotal } )
-        this.setState( { usageCharges: usageCharges} )
+        let a = new Date(this.state.period1StartDate)
+        let b = new Date(this.state.period1EndDate)
+        let period1Days = (b-a)/(1000 * 60 * 60 *24)+1
+        this.setState( { calcBillTotal: billTotal } )
+        this.setState( { calcUsageCharges: usageCharges} )
+        this.setState( { calcPeriod1Days: period1Days } )
     }
     handleChange = async (e) => {
         const value = e.target.value
@@ -46,16 +54,20 @@ class FormContainer extends React.Component {
                             return <FormInput name={field.name} alias={field.alias} type={field.type} onChange={this.handleChange} Calc={this.calcFields} />
                         } else if (field.type === "dropdown") {
                             return <FormSelect name={field.name} alias={field.alias} options={field.options} onChange={this.handleChange} />
+                        } else if (field.type === "date") {
+                            return <FormInput name={field.name} alias={field.alias} type={field.type} onChange={this.handleChange} Calc={this.calcFields} />
                         }
 
                     })}
                 </div>
                 <div className="CalcFields">
                     <h2>Calculated Fields</h2>
-                    <p>Calc Bill Total</p>
-                    <p>{this.state.billTotal}</p>
+                    <p>Calculated Bill Total</p>
+                    <p>{this.state.calcBillTotal}</p>
+                    <p>Period 1 Days</p>
+                    <p>{this.state.calcPeriod1Days}</p>
                     <p>Usage Charges</p>
-                    <p>{this.state.usageCharges}</p>
+                    <p>{this.state.calcUsageCharges}</p>
                     <input className="Button" type="button" onClick={this.calcFields} value="Calc now"></input>
                 </div>
                 <div>
