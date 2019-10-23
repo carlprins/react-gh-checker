@@ -1,4 +1,5 @@
 import React from 'react';
+import BillDetails from '../BillDetails/BillDetails'
 import FormSection from '../formSection/formSection';
 import './formContainer.css';
 import reqFields from '../Requirements/Requirements';
@@ -67,6 +68,9 @@ class FormContainer extends React.Component {
     render(){
         return (
             <div className="FormContainer" >
+                <div>
+                    <BillDetails />
+                </div>
                 <div className="InputFields">
                     <h1>{this.props.formTitle}</h1>
                     {reqFields.map(field => {

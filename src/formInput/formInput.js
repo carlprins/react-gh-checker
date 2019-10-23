@@ -10,9 +10,10 @@ class FormInput extends React.Component {
     handleUserInput(e) {
         let value = e.target.value
         this.setState({userInput: value});
-        this.props.onChange(e).then(resolved => {
+        this.props.onChange(e)
+        /*this.props.onChange(e).then(resolved => {
             this.props.Calc()
-        });
+        })*/;
     }
     render(){
         return (
