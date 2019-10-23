@@ -14,48 +14,57 @@ const retailers = [
 const reqFields = [
     {
         id: 1,
-        name: "Retailer",
+        name: "retailer",
+        alias: "Retailer",
         type: "dropdown",
         options: retailers.map(retailer => retailer.name)
     }, {
         id: 2,
-        name: "Bill Start Date",
+        name: "billStartDate",
+        alias: "Bill Start Date",
         type: "date",
         options: []
     }, {
         id: 3,
-        name: "Bill End Date",
+        name: "billEndDate",
+        alias: "Bill End Date",
         type: "date",
         options: []
     }, {
         id: 4,
-        name: "OpeningBalance",
+        name: "openingBalance",
+        alias: "Opening Balance",
         type: "number",
         options: []
     }, {
         id: 5,
-        name: "ClosingBalance",
+        name: "closingBalance",
+        alias: "Closing Balance",
         type: "number",
         options: []
     },{
         id: 4,
-        name: "Period Start Date",
+        name: "periodStartDate",
+        alias: "Period Start Date",
         type: "date",
         options: []
 
     }, {
         id: 5,
-        name: "Period End Date",
+        name: "periodEndDate",
+        alias: "Period End Date",
         type: "date",
         options: []
     }, {
         id: 6,
-        name: "Peak Usage",
+        name: "peakUsage",
+        alias: "Peak Usage",
         type: "number",
         options: []
     }, {
         id: 7,
-        name: "Peak Rate",
+        name: "peakRate",
+        alias: "Peak Rate",
         type: "number",
         options: []
     }

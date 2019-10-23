@@ -17,7 +17,7 @@ class FormInput extends React.Component {
     render(){
         return (
             <div className="InputItem">
-                <p>{this.props.name}</p>
+                <p>{this.props.alias}</p>
                 <input type={this.props.type} onChange={this.handleUserInput} value={this.state.userInput} name={this.props.name} />
                 <h2>{this.state.userInput}</h2>
             </div>

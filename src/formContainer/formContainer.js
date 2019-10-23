@@ -10,52 +10,52 @@ class FormContainer extends React.Component {
     constructor(props){
         super(props)
         this.state = { 
-            billTotal: 0,
-            OpeningBalance: 0,
-            ClosingBalance: 0,
-            Retailer: ""
+            billTotal: '',
+            openingBalance: '',
+            closingBalance: '',
+            retailer: "",
+            peakUsage: '',
+            peakRate: '',
+            usageCharges: '',
+
         }
         this.handleChange = this.handleChange.bind(this);
         this.calcFields = this.calcFields.bind(this);
         
     }
     calcFields(){
-        let billTotal = this.state.ClosingBalance - this.state.OpeningBalance
+        let billTotal = this.state.closingBalance - this.state.openingBalance
+        let usageCharges = this.state.peakUsage * this.state.peakRate /100
         this.setState( { billTotal: billTotal } )
+        this.setState( { usageCharges: usageCharges} )
     }
     handleChange = async (e) => {
         const value = e.target.value
         const name = e.target.name
-        console.log(value)
-        console.log(name)
-        this.setState({ [name]: value })
+        this.setState({ [name]: value } )
         
     }
 
     render(){
         return (
             <div className="FormContainer" >
-                <div className="FormHeading">
+                <div className="InputFields">
                     <h1>{this.props.formTitle}</h1>
                     {reqFields.map(field => {
                         if (field.type === "number") {
-                            return <FormInput name={field.name} type={field.type} onChange={this.handleChange} Calc={this.calcFields} />
+                            return <FormInput name={field.name} alias={field.alias} type={field.type} onChange={this.handleChange} Calc={this.calcFields} />
                         } else if (field.type === "dropdown") {
-                            return <FormSelect name={field.name} options={field.options} onChange={this.handleChange} />
+                            return <FormSelect name={field.name} alias={field.alias} options={field.options} onChange={this.handleChange} />
                         }
 
                     })}
                 </div>
                 <div className="CalcFields">
-                    <h2>Calculated Fields from this form</h2>
-                    <p>Opening Balance</p>
-                    <p>{this.state.OpeningBalance}</p>
-                    <p>Closing Balance</p>
-                    <p>{this.state.ClosingBalance}</p>
+                    <h2>Calculated Fields</h2>
                     <p>Calc Bill Total</p>
                     <p>{this.state.billTotal}</p>
-                    <p>Selected Retailer</p>
-                    <p>{this.state.Retailer}</p>
+                    <p>Usage Charges</p>
+                    <p>{this.state.usageCharges}</p>
                     <input className="Button" type="button" onClick={this.calcFields} value="Calc now"></input>
                 </div>
                 <div>
