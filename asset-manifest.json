@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/react-gh-checker/static/css/main.611220a7.chunk.css",
-    "main.js": "/react-gh-checker/static/js/main.1f7f40bb.chunk.js",
-    "main.js.map": "/react-gh-checker/static/js/main.1f7f40bb.chunk.js.map",
+    "main.css": "/react-gh-checker/static/css/main.7df6c0c1.chunk.css",
+    "main.js": "/react-gh-checker/static/js/main.9650b386.chunk.js",
+    "main.js.map": "/react-gh-checker/static/js/main.9650b386.chunk.js.map",
     "runtime-main.js": "/react-gh-checker/static/js/runtime-main.2b5fca44.js",
     "runtime-main.js.map": "/react-gh-checker/static/js/runtime-main.2b5fca44.js.map",
-    "static/js/2.b287dcab.chunk.js": "/react-gh-checker/static/js/2.b287dcab.chunk.js",
-    "static/js/2.b287dcab.chunk.js.map": "/react-gh-checker/static/js/2.b287dcab.chunk.js.map",
+    "static/js/2.5386b076.chunk.js": "/react-gh-checker/static/js/2.5386b076.chunk.js",
+    "static/js/2.5386b076.chunk.js.map": "/react-gh-checker/static/js/2.5386b076.chunk.js.map",
     "index.html": "/react-gh-checker/index.html",
-    "precache-manifest.11eb23178ae5c2a541ceb48c9a6598e6.js": "/react-gh-checker/precache-manifest.11eb23178ae5c2a541ceb48c9a6598e6.js",
+    "precache-manifest.5b493e7dbb2a2ad833cf9c5847b278e4.js": "/react-gh-checker/precache-manifest.5b493e7dbb2a2ad833cf9c5847b278e4.js",
     "service-worker.js": "/react-gh-checker/service-worker.js",
-    "static/css/main.611220a7.chunk.css.map": "/react-gh-checker/static/css/main.611220a7.chunk.css.map"
+    "static/css/main.7df6c0c1.chunk.css.map": "/react-gh-checker/static/css/main.7df6c0c1.chunk.css.map"
   }
 }
