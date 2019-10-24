@@ -1,7 +1,8 @@
 import React from 'react';
 import './BillDetails.css';
-import billDate, { billData } from '../Data/Data'
+import { billInput, billCalc } from '../Data/Data';
 import FormInput from '../formInput/formInput';
+import { dateDiff } from '../Calculations/Calculations'
 
 const billFields = [
     {
@@ -31,26 +32,36 @@ class BillDetails extends React.Component {
         super(props)
         this.state = {
             numberOfPeriods: 1,
-            billStartDate: '01/02/2019',
+            billStartDate: '',
             billEndDate: '',
+            billDays: '',
         }
         this.handleDateChange = this.handleDateChange.bind(this);
+        this.calcFields = this.calcFields.bind(this);
     }
 
-    handleDateChange = (e) => {
+    handleDateChange = async (e) => {
         const enteredDate = e.target.value
         const name = e.target.name
         this.setState({ [name]: enteredDate } )
-        billData.billStartDate = enteredDate
+        billInput[name] = enteredDate
+    }
+
+    calcFields = () => {
+        let billDays = dateDiff(this.state.billStartDate,this.state.billEndDate)
+        billCalc.billDays = billDays
+        this.setState( {billDays: billDays} )
     }
 
     render(){
         return (
             <div className="BillDetails">
                 {billFields.map(field => {
-                    return <FormInput alias={field.alias} name={field.name} type={field.type} onChange={this.handleDateChange} />
+                    return <FormInput alias={field.alias} name={field.name} type={field.type} onChange={this.handleDateChange} Calc={this.calcFields} />
                 })}
-                <p>from the database {billData.billStartDate} from state:{this.state.billStartDate}</p>
+                <p>Start from the database {billInput.billStartDate} from state:{this.state.billStartDate}</p>
+                <p>End from the database {billInput.billEndDate} from state:{this.state.billEndDate}</p>
+                <p>Days in bill from DB: {billCalc.billDays} from state: {this.state.billDays} </p>
             </div>
             
             
