@@ -95,23 +95,23 @@ const screens = {
         ]
     },
     screen4: {
-        head: "This is screen 4",
-        par: "Let's work out what charges you incurred during this bill",
+        head: "It's time to get specific",
+        par: "Time to fill out the detail usage information from your bill",
         questions: [
             {
-                name: 'openingBalance',
-                label: 'What was the opening balance on this bill?',
-                type: 'number',
+                name: 'period1StartDate',
+                label: 'What is the start date of this period?',
+                type: 'date',
                 options: []
             },{
-                name: 'netClosingBalance',
-                label: 'What is the net amount owed if you pay before Due date?',
-                type: 'number',
+                name: 'period1EndDate',
+                label: 'What is the last date in this period?',
+                type: 'date',
                 options: []
             },{
                 name: 'grossClosingBalance',
                 label: 'What is the amount owed if you miss your due date?',
-                type: 'number',
+                type: 'table',
                 options: []
             }
         ],

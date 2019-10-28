@@ -10,6 +10,7 @@ import './formContainer.css';
 
 import FormInput from '../formInput/formInput';
 import FormSelect from '../formSelect/formSelect';
+import FormTable from '../formTable/formTable';
 import FormButton from '../FormButton/FormButton';
 import {billCalc} from '../Data/Data';
 import LowerNav from '../LowerNAV/LowerNAV';
@@ -25,7 +26,7 @@ class FormContainer extends React.Component {
         super(props)
         this.state = { 
             //New format
-            screen: 'screen3',
+            screen: 'screen4',
             //Input fields captured
             fuelType: '',
             retailer: '',
@@ -116,6 +117,8 @@ class FormContainer extends React.Component {
                             return <FormInput name={field.name} label={field.label} type={field.type} onChange={this.handleChange} />
                         } else if (field.type === "number") {
                             return <FormInput name={field.name} label={field.label} type={field.type} onChange={this.handleChange} />
+                        } if (field.type === "table") {
+                            return <FormTable />
                         }
                         
                     })}

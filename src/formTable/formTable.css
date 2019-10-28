@@ -1,0 +1,13 @@
+table {
+    margin: 20px;
+}
+
+th {
+    background-color: lightsalmon;
+    font-size: 20px;
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+}
