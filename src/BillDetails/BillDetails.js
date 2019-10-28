@@ -3,6 +3,8 @@ import './BillDetails.css';
 import { billInput, billCalc } from '../Data/Data';
 import FormInput from '../formInput/formInput';
 import { dateDiff } from '../Calculations/Calculations'
+import CalcDisplay from '../CalcDisplay/CalcDisplay';
+import PeriodDetails from '../PeriodDetails/PeriodDetails';
 
 const billFields = [
     {
@@ -56,12 +58,12 @@ class BillDetails extends React.Component {
     render(){
         return (
             <div className="BillDetails">
+                <p>This is the Bill Details Component</p>
                 {billFields.map(field => {
                     return <FormInput alias={field.alias} name={field.name} type={field.type} onChange={this.handleDateChange} Calc={this.calcFields} />
                 })}
-                <p>Start from the database {billInput.billStartDate} from state:{this.state.billStartDate}</p>
-                <p>End from the database {billInput.billEndDate} from state:{this.state.billEndDate}</p>
-                <p>Days in bill from DB: {billCalc.billDays} from state: {this.state.billDays} </p>
+                <PeriodDetails />
+                <CalcDisplay />
             </div>
             
             

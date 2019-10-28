@@ -11,13 +11,13 @@ class FormInput extends React.Component {
         let value = e.target.value
         this.setState({userInput: value});
         this.props.onChange(e).then(resolved => {
-            this.props.Calc()
+            return
         });
     }
     render(){
         return (
             <div className="InputItem">
-                <p>{this.props.alias}</p>
+                <p>{this.props.label}</p>
                 <input type={this.props.type} onChange={this.handleUserInput} value={this.state.userInput} name={this.props.name} />
                 <h2>{this.state.userInput}</h2>
             </div>

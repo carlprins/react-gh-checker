@@ -1,3 +1,102 @@
+const screens = {
+    screen1: {
+        head: "Welcome to Bill Checker",
+        par: "Fill out your details and we'll start checking",
+        questions: [
+            {
+                name: 'fuelType',
+                label: 'Is this an electricity or gas bill?',
+                type: 'dropdown',
+                options: ["Please select","Electricity","Natural Gas"]
+            },{
+                name: 'retailer',
+                label: 'Who is your service provider?',
+                type: 'dropdown',
+                options: ["Please select","EnergyAustralia","AGL","Origin Energy"]
+            }
+        ],
+        buttons: [
+            {
+                name: 'backButton',
+                label: 'Back',
+                type: 'Left Nav Button',
+                newScreenState: 'screen1',
+                options: []
+            },{
+                name: 'nextButton',
+                label: 'Next',
+                type: 'Right Nav Button',
+                newScreenState: 'screen2',
+                options: []
+            }
+        ]
+    },
+    screen2: {
+        head: "What period does this bill cover?",
+        par: "We'd like to understand the time period for your bill",
+        questions: [
+            {
+                name: 'billStartDate',
+                label: 'Bill start date',
+                type: 'date',
+                options: []
+            },{
+                name: 'billEndDate',
+                label: 'Bill end date',
+                type: 'date',
+                options: []
+            }
+        ],
+        buttons: [
+            {
+                name: 'backButton',
+                label: 'Back',
+                type: 'Left Nav Button',
+                newScreenState: "screen1",
+                options: []
+            },{
+                name: 'nextButton',
+                label: 'Next',
+                type: 'Right Nav Button',
+                newScreenState: 'screen3',
+                options: []
+            }
+        ]
+    },
+    screen3: {
+        head: "This is the third screen",
+        par: "We'd like to understand the time period for your bill",
+        questions: [
+            {
+                name: 'billStartDate',
+                label: 'What is the starting date of this bill?',
+                type: 'date',
+                options: []
+            },{
+                name: 'billEndDate',
+                label: 'What is the end date of this bill?',
+                type: 'date',
+                options: []
+            }
+        ],
+        buttons: [
+            {
+                name: 'backButton',
+                label: 'Back',
+                type: 'Left Nav Button',
+                newScreenState: "screen2",
+                options: []
+            },{
+                name: 'nextButton',
+                label: 'Next',
+                type: 'Right Nav Button',
+                newScreenState: 'screen3',
+                options: []
+            }
+        ]
+    }
+}
+
 const retailers = [
     {
         name: "Origin Energy",
@@ -63,4 +162,4 @@ const reqFields = [
     }
 ]
 
-export default reqFields;
+export { reqFields, screens }

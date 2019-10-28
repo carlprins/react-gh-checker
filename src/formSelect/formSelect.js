@@ -1,4 +1,5 @@
 import React from 'react';
+import './formSelect.css';
 
 class FormSelect extends React.Component {
     constructor(props) {
@@ -23,8 +24,8 @@ class FormSelect extends React.Component {
     render() {
       return (
         <form>
-          <label>
-            {this.props.name}
+          <label className="Dropdown">
+            {this.props.label}
             <select value={this.state.value} onChange={this.handleChange} name={this.props.name}>
               {this.props.options.map(option => <option value={option} key={1}>{option}</option>)}
               

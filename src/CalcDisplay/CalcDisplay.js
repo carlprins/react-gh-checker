@@ -1,5 +1,6 @@
 import React from 'react';
 import { billCalc, billInput } from '../Data/Data'
+import './CalcDisplay.css';
 
 class CalcDisplay extends React.Component {
     constructor(props){
@@ -10,7 +11,11 @@ class CalcDisplay extends React.Component {
     }
     render(){
         return (
-            <p>I wish I could show you {billCalc.billDays}</p>
+            <div className="CalcDisplay">
+                <p>This is the Calc Display Component {billCalc.billDays}</p>
+                <p>The number of days in the bill (from DB) is: {billCalc.billDays}</p>
+            </div>
+            
         )
     }
 }

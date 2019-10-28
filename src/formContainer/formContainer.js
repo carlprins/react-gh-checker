@@ -1,28 +1,44 @@
 import React from 'react';
+import {screens} from '../Requirements/Requirements';
+import {reqFields} from '../Requirements/Requirements';
 import BillDetails from '../BillDetails/BillDetails'
+import Messaging from '../Messaging/Messaging';
 import CalcDisplay from '../CalcDisplay/CalcDisplay';
 import FormSection from '../formSection/formSection';
 import './formContainer.css';
-import reqFields from '../Requirements/Requirements';
+
 import FormInput from '../formInput/formInput';
 import FormSelect from '../formSelect/formSelect';
+import FormButton from '../FormButton/FormButton';
+import {billCalc} from '../Data/Data';
+import LowerNav from '../LowerNAV/LowerNAV';
 
 export const periodData = {
     calcGrossBill: "Hi there",
     value: 100
 }
 
+
 class FormContainer extends React.Component {
     constructor(props){
         super(props)
         this.state = { 
-            retailer: "",
+            //New format
+            screen: 'screen1',
+            fuelType: 'not selected',
+            retailer: 'not selected',
+            billStartDate: '',
+            billEndDate: '',
+            //All fields below are legacy
+            
             openingBalance: '',
             closingBalance: '',
             calcBillTotal: '',
             period1StartDate: '',
             period1EndDate: '',
-            calcPeriod1Days: '',
+            // Calcs coming in from the Bill
+            calcBillDays: '',
+            
             peakUsage: '',
             peakRate: '',
             calcUsageCharges: '',
@@ -34,6 +50,7 @@ class FormContainer extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.calcFields = this.calcFields.bind(this);
+        this.changeScreen = this.changeScreen.bind(this);
         
     }
     calcFields(){
@@ -65,33 +82,43 @@ class FormContainer extends React.Component {
         this.setState({ [name]: value } )
         
     }
+    changeScreen = (newScreenState) => {
+        this.setState({screen: newScreenState})
+        
+    }
 
     render(){
         return (
             <div className="FormContainer" >
-                <div>
-                    <BillDetails />
-                    <CalcDisplay />
-                </div>
-                <div className="InputFields">
-                    <h1>{this.props.formTitle}</h1>
-                    {reqFields.map(field => {
-                        if (field.type === "number") {
-                            return <FormInput name={field.name} alias={field.alias} type={field.type} onChange={this.handleChange} Calc={this.calcFields} />
-                        } else if (field.type === "dropdown") {
-                            return <FormSelect name={field.name} alias={field.alias} options={field.options} onChange={this.handleChange} />
+                <div className="ScreenContent">
+                    <p>This is the Form Container</p>
+                    
+                    <Messaging question={this.state.screen} />
+                    
+                    {screens[this.state.screen].questions.map(field => {
+                        if (field.type === "dropdown") {
+                            return <FormSelect name={field.name} label={field.label} options={field.options} onChange={this.handleChange} />
                         } else if (field.type === "date") {
-                            return <FormInput name={field.name} alias={field.alias} type={field.type} onChange={this.handleChange} Calc={this.calcFields} />
+                            return <FormInput name={field.name} label={field.label} type={field.type} onChange={this.handleChange} />
                         }
-
+                        
                     })}
+                    
+                    <LowerNav screen={this.state.screen} changeScreen={this.changeScreen} />
+                    
                 </div>
+                
                 <div className="CalcFields">
                     <h2>Calculated Fields</h2>
-                    <p>Calculated Bill Total</p>
-                    <p>{this.state.calcBillTotal}</p>
-                    <p>Period 1 Days</p>
-                    <p>{this.state.calcPeriod1Days}</p>
+                    <p>Selected Fuel Type (from State)</p>
+                    <p className="Answer">{this.state.fuelType}</p>
+                    <p>Selected Retailer (from State)</p>
+                    <p className="Answer">{this.state.retailer}</p>
+                    <p>Bill Start Date</p>
+                    <p className="Answer">{this.state.billStartDate}</p>
+                    <p>Bill End Date</p>
+                    <p className="Answer">{this.state.billEndDate}</p>
+                    
                     <p>Usage Charges</p>
                     <p>{this.state.calcUsageCharges}</p>
                     <p>Supply Charges</p>
