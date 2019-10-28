@@ -24,15 +24,17 @@ class FormContainer extends React.Component {
         super(props)
         this.state = { 
             //New format
-            screen: 'screen1',
+            screen: 'screen3',
+            //Input fields captured
             fuelType: 'not selected',
             retailer: 'not selected',
             billStartDate: '',
             billEndDate: '',
-            //All fields below are legacy
-            
             openingBalance: '',
             closingBalance: '',
+            //All fields below are legacy
+            
+            
             calcBillTotal: '',
             period1StartDate: '',
             period1EndDate: '',
@@ -99,6 +101,8 @@ class FormContainer extends React.Component {
                         if (field.type === "dropdown") {
                             return <FormSelect name={field.name} label={field.label} options={field.options} onChange={this.handleChange} />
                         } else if (field.type === "date") {
+                            return <FormInput name={field.name} label={field.label} type={field.type} onChange={this.handleChange} />
+                        } else if (field.type === "number") {
                             return <FormInput name={field.name} label={field.label} type={field.type} onChange={this.handleChange} />
                         }
                         

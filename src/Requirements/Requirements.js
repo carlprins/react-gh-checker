@@ -64,18 +64,23 @@ const screens = {
         ]
     },
     screen3: {
-        head: "This is the third screen",
-        par: "We'd like to understand the time period for your bill",
+        head: "Opening and Closing Balance",
+        par: "Let's work out what charges you incurred during this bill",
         questions: [
             {
-                name: 'billStartDate',
-                label: 'What is the starting date of this bill?',
-                type: 'date',
+                name: 'openingBalance',
+                label: 'What was the opening balance on this bill?',
+                type: 'number',
                 options: []
             },{
-                name: 'billEndDate',
-                label: 'What is the end date of this bill?',
-                type: 'date',
+                name: 'netClosingBalance',
+                label: 'What is the net amount owed if you pay before Due date?',
+                type: 'number',
+                options: []
+            },{
+                name: 'grossClosingBalance',
+                label: 'What is the amount owed if you miss your due date?',
+                type: 'number',
                 options: []
             }
         ],
