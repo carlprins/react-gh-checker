@@ -1,4 +1,7 @@
 .Dropdown {
-    background-color: lightgreen;
-    margin: 5px;
+ margin: 0px;  
+}
+
+Select {
+    margin: 15px
 }

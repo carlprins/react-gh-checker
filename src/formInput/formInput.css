@@ -1,3 +1,8 @@
 .InputItem {
     background-color: rgb(235, 227, 228);
 }
+
+Input {
+    margin: 15px;
+    
+}

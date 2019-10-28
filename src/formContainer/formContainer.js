@@ -1,5 +1,6 @@
 import React from 'react';
 import {screens} from '../Requirements/Requirements';
+import {billInput} from '../Data/Data'
 import {reqFields} from '../Requirements/Requirements';
 import BillDetails from '../BillDetails/BillDetails'
 import Messaging from '../Messaging/Messaging';
@@ -26,8 +27,8 @@ class FormContainer extends React.Component {
             //New format
             screen: 'screen3',
             //Input fields captured
-            fuelType: 'not selected',
-            retailer: 'not selected',
+            fuelType: '',
+            retailer: '',
             billStartDate: '',
             billEndDate: '',
             openingBalance: '',
@@ -56,7 +57,17 @@ class FormContainer extends React.Component {
         
     }
     calcFields(){
-        let field = this.state
+        //Bill Days Calculation
+        let a = new Date(billInput.billStartDate)
+        let b = new Date(billInput.billEndDate)
+        let dateDiffDays = (b-a)/(1000 * 60 * 60 * 24) + 1
+        billInput.billDays = dateDiffDays
+        
+        //Control Gross/Net Charges
+        billInput.grossControlCharges = billInput.grossClosingBalance - billInput.openingBalance
+        billInput.netControlCharges = billInput.netClosingBalance - billInput.openingBalance
+
+        /*let field = this.state
         let billTotal = field.closingBalance - field.openingBalance
         let usageCharges = field.peakUsage * field.peakRate /100
         let a = new Date(field.period1StartDate)
@@ -73,14 +84,16 @@ class FormContainer extends React.Component {
             calcSupplyCharges: supplyCharges,
             calcGrossBill: grossBill,
             calcControl: controlDiff,
-            })
-        /*this.setState( { calcUsageCharges: usageCharges} )
-        this.setState( { calcPeriod1Days: period1Days } )
-        this.setState( {calcSupplyCharges: supplyCharges} )*/
+            })*/
+        
     }
-    handleChange = async (e) => {
+    handleChange = (e) => {
         const value = e.target.value
         const name = e.target.name
+        // Update the "database"
+        billInput[name] = value
+        this.calcFields()
+        //Update the state and trigger re-render
         this.setState({ [name]: value } )
         
     }
@@ -93,8 +106,7 @@ class FormContainer extends React.Component {
         return (
             <div className="FormContainer" >
                 <div className="ScreenContent">
-                    <p>This is the Form Container</p>
-                    
+                                        
                     <Messaging question={this.state.screen} />
                     
                     {screens[this.state.screen].questions.map(field => {
@@ -109,7 +121,14 @@ class FormContainer extends React.Component {
                     })}
                     
                     <LowerNav screen={this.state.screen} changeScreen={this.changeScreen} />
-                    
+                    <p>Fuel type in DB: {billInput.fuelType}</p>
+                    <p>Retailer in DB: {billInput.retailer}</p>
+                    <p>billStartDate in DB: {billInput.billStartDate}</p>
+                    <p>billEndDate in DB: {billInput.billEndDate}</p>
+                    <p>There are {billInput.billDays} days in this bill</p>
+                    <p>Opening Balance was {billInput.openingBalance}</p>
+                    <p>Closing Balance was {billInput.netClosingBalance} and {billInput.grossClosingBalance}</p>
+                    <p>Control total net: {billInput.netControlCharges} gross: {billInput.grossControlCharges}</p>
                 </div>
                 
                 <div className="CalcFields">

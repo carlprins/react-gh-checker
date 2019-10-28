@@ -13,7 +13,7 @@ class FormSelect extends React.Component {
     handleChange(e) {
       let value = e.target.value
       this.setState({ userInput: value});
-      this.props.onChange(e).then(result => {return});
+      this.props.onChange(e)/*.then(result => {return})*/;
     }
   
     handleSubmit(event) {
@@ -25,14 +25,13 @@ class FormSelect extends React.Component {
       return (
         <form>
           <label className="Dropdown">
-            {this.props.label}
+            <p>{this.props.label}</p>
             <select value={this.state.value} onChange={this.handleChange} name={this.props.name}>
               {this.props.options.map(option => <option value={option} key={1}>{option}</option>)}
               
             </select>
           </label>
-          <h2>{this.state.userInput}</h2>
-          
+                    
         </form>
       );
     }

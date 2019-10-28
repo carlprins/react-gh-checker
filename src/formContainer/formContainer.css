@@ -6,6 +6,11 @@
   background-color: #E6F6FF;
 }
 
+.CalcFields {
+  margin: 20px;
+  
+}
+
 .Answer {
   color: red;
 }
@@ -35,7 +40,8 @@ h2 {
 }
 
 p {
-  padding: 5px;
+  padding: 10px;
+  margin: 10px
 }
 
 input {

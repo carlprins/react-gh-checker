@@ -17,12 +17,6 @@ const screens = {
         ],
         buttons: [
             {
-                name: 'backButton',
-                label: 'Back',
-                type: 'Left Nav Button',
-                newScreenState: 'screen1',
-                options: []
-            },{
                 name: 'nextButton',
                 label: 'Next',
                 type: 'Right Nav Button',
@@ -95,7 +89,44 @@ const screens = {
                 name: 'nextButton',
                 label: 'Next',
                 type: 'Right Nav Button',
-                newScreenState: 'screen3',
+                newScreenState: 'screen4',
+                options: []
+            }
+        ]
+    },
+    screen4: {
+        head: "This is screen 4",
+        par: "Let's work out what charges you incurred during this bill",
+        questions: [
+            {
+                name: 'openingBalance',
+                label: 'What was the opening balance on this bill?',
+                type: 'number',
+                options: []
+            },{
+                name: 'netClosingBalance',
+                label: 'What is the net amount owed if you pay before Due date?',
+                type: 'number',
+                options: []
+            },{
+                name: 'grossClosingBalance',
+                label: 'What is the amount owed if you miss your due date?',
+                type: 'number',
+                options: []
+            }
+        ],
+        buttons: [
+            {
+                name: 'backButton',
+                label: 'Back',
+                type: 'Left Nav Button',
+                newScreenState: "screen3",
+                options: []
+            },{
+                name: 'nextButton',
+                label: 'Next',
+                type: 'Right Nav Button',
+                newScreenState: 'screen5',
                 options: []
             }
         ]
